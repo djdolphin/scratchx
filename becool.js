@@ -9,9 +9,14 @@
     document.getElementById('scratch').style.transform = 'rotate(180deg)';
   };
 
+  ext.beUncool = function() {
+    document.getElementById('scratch').style.transform = 'rotate(0deg)';
+  }
+
   var descriptor = {
     blocks: [
-      [' ', 'be cool', 'beCool']
+      [' ', 'be cool', 'beCool'],
+      [' ', 'be uncool', 'beUncool']
     ]
   };
 
