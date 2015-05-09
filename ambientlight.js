@@ -22,5 +22,5 @@
     ]
   };
 
-  ScratchExtensions.register('Ambient Lighting', descriptor, ext);
+  ScratchExtensions.register('Ambient Light', descriptor, ext);
 })({});
