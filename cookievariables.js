@@ -2,19 +2,23 @@
   if (!localStorage.cookieVars) localStorage.cookieVars = '{}';
   var projectID = Scratch.INIT_DATA ? Scratch.INIT_DATA.PROJECT.model.id : 0,
     cookieVars = JSON.parse(localStorage.cookieVars)[projectID] || {};
+
   function DescriptorBuilder(descriptor) {
     this.descriptor = descriptor;
   }
+
   DescriptorBuilder.prototype.addBlock = function(type, label, op, defaultArgs) {
     if (!this.descriptor.blocks) this.descriptor.blocks = [];
     var block = [type, label, op];
     if (defaultArgs instanceof Array) for (var i = 0, l = defaultArgs.length; i < l; i++) block.push(defaultArgs[i]);
     this.descriptor.blocks.push(block);
   };
+
   DescriptorBuilder.prototype.addButton = function(label, action) {
     if (!this.descriptor.blocks) this.descriptor.blocks = [];
     this.descriptor.blocks.push([null, label, action]);
-  }
+  };
+
   DescriptorBuilder.prototype.addSpace = function(height) {
     if (!this.descriptor.blocks) this.descriptor.blocks = [];
     if (height === undefined) height = 1;
@@ -22,19 +26,24 @@
     for (var i = 0; i < height; i++) s += '-';
     this.descriptor.blocks.push([s]);
   };
+
   DescriptorBuilder.prototype.addMenu = function(name, menu) {
     if (!this.descriptor.menus) this.descriptor.menus = {};
     this.descriptor.menus[name] = menu;
-  }
+  };
+
   var extBase = {};
+
   extBase._shutdown = function() {
     var cookieVarBank = JSON.parse(localStorage.cookieVars);
     cookieVarBank[projectID] = cookieVars;
     localStorage.cookieVars = JSON.stringify(cookieVarBank);
   };
+
   extBase._getStatus = function() {
     return {status: 2, msg: 'Ready'};
   };
+
   extBase.makeCookieVar = function() {
     var name = prompt('Variable name:');
     if (name in cookieVars) alert('Cannot add! That name is already in use.')
@@ -44,6 +53,7 @@
     }
     d.show(editor);
   };
+
   extBase.deleteCookieVar = function() {
     var name = prompt('Variable name:');
     if (!(name in cookieVars)) alert('Cannot delete! A variable with that name does not exist.')
@@ -52,18 +62,21 @@
       reloadExtension();
     }
   };
+
   extBase.setCookieVar = function(varName, value) {
     varName = varName.substr(3);
     var shouldReload = !(varName in cookieVars);
     cookieVars[varName] = value;
     if (shouldReload) reloadExtension();
-  }
+  };
+
   extBase.changeCookieVar = function(varName, amount) {
     varName = varName.substr(3);
     var shouldReload = !(varName in cookieVars);
     cookieVars[varName] = (Number(cookieVars[varName]) || 0) + amount;
     if (shouldReload) reloadExtension();
-  }
+  };
+
   function loadExtension() {
     var ext = Object.create(extBase),
       varNames = Object.keys(cookieVars),
@@ -89,11 +102,12 @@
       db.addMenu('cookieVar', cookieVarMenu);
     }
     ScratchExtensions.register('Cookie Variables', descriptor, ext);
-  }
+  };
   
   function reloadExtension() {
     ScratchExtensions.unregister('Cookie Variables');
     loadExtension();
   }
+
   loadExtension();
 })();
