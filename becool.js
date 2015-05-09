@@ -5,20 +5,15 @@
     return {status: 2, message: 'Ready'};
   };
 
-  ext.beCool = function() {
-    document.getElementById('scratch').style.transform = 'rotate(180deg)';
+  ext.rotate = function(degrees) {
+    document.getElementById('scratch').style.transform = 'rotate(' + degrees + 'deg)';
   };
-
-  ext.beUncool = function() {
-    document.getElementById('scratch').style.transform = 'rotate(0deg)';
-  }
 
   var descriptor = {
     blocks: [
-      [' ', 'be cool', 'beCool'],
-      [' ', 'be uncool', 'beUncool']
+      [' ', 'rotate %n degrees', 'rotate']
     ]
   };
 
-  ScratchExtensions.register('Be cool', descriptor, ext);
+  ScratchExtensions.register('Be Cool', descriptor, ext);
 })({});
