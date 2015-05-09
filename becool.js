@@ -11,7 +11,7 @@
 
   var descriptor = {
     blocks: [
-      [' ', 'rotate %n degrees', 'rotate']
+      [' ', 'rotate %n degrees', 'rotate', 180]
     ]
   };
 
