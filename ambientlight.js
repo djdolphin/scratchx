@@ -18,7 +18,7 @@
 
   var descriptor = {
     blocks: [
-      ['r', 'ambient light', ambientLight]
+      ['r', 'ambient light', 'ambientLight']
     ]
   };
 
