@@ -1,17 +1,19 @@
 (function(ext) {
+  var editor = document.getElementById('scratch');
+
   ext._shutdownn = function() {};
 
   ext._getStatus = function() {
     return {status: 2, message: 'Ready'};
   };
 
-  ext.rotate = function(degrees) {
-    document.getElementById('scratch').style.transform = 'rotate(' + degrees + 'deg)';
+  ext.rotateEditor = function(degrees) {
+    editor.style.transform = editor.style.webkitTransform = 'rotate(' + degrees + 'deg)';
   };
 
   var descriptor = {
     blocks: [
-      [' ', 'rotate %n degrees', 'rotate', 180]
+      [' ', 'rotate editor %n degrees', 'rotateEditor', 180]
     ]
   };
 
